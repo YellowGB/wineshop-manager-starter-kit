@@ -22,14 +22,18 @@ public class WinesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Wine>>> GetAll()
     {
-        return await _context.Wines.ToListAsync();
+        return await _context.Wines
+            .Include(w => w.WineType)
+            .ToListAsync();
     }
 
     // GET: api/wines/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Wine>> GetById(int id)
     {
-        var wine = await _context.Wines.FindAsync(id);
+        var wine = await _context.Wines
+            .Include(w => w.WineType)
+            .FirstOrDefaultAsync(w => w.Id == id);
 
         if (wine == null)
         {
