@@ -68,6 +68,7 @@ public class WinesController : ControllerBase
             {
                 return NotFound();
             }
+
             throw;
         }
 

@@ -28,23 +28,30 @@ This downloads all required NuGet packages (Entity Framework Core, Pomelo MySQL,
 
 ### 3. Configure your database connection
 
-Edit `WineshopManagerStarterKit/appsettings.json`:
+The `appsettings.json` file is **not committed** to the repository (it is gitignored because it contains credentials that differ per machine). You need to create it from the provided template:
+
+```bash
+cd WineshopManagerStarterKit
+cp appsettings.json.template appsettings.json
+```
+
+Then open `appsettings.json` and update it with your own credentials.
 
 #### If using MySQL (default)
 
-The app tries to connect to MySQL first using the `DefaultConnection` string. Update it with your MySQL credentials:
+Replace `YOUR_MYSQL_PASSWORD` with your actual MySQL password (or leave it empty if you have no password):
 
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;Database=wineshop_db;User=root;Password=mysql;Convert Zero Datetime=true;"
+    "DefaultConnection": "Server=localhost;Port=3306;Database=wineshop_db;User=root;Password=;Convert Zero Datetime=true;"
   }
 }
 ```
 
 #### If using SQL Server
 
-If MySQL is not available, the app automatically falls back to SQL Server using the `SqlServerConnection` string:
+Update the `SqlServerConnection` string if needed:
 
 ```json
 {
@@ -54,7 +61,7 @@ If MySQL is not available, the app automatically falls back to SQL Server using 
 }
 ```
 
-> **Note:** The fallback is automatic — no configuration change is needed. If MySQL is running, it will be used. Otherwise, SQL Server is used.
+> **Note:** The fallback is automatic — no configuration change is needed. The app tries to connect to MySQL first. If MySQL is not available, it falls back to SQL Server.
 
 ### 4. Run the application
 

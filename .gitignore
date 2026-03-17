@@ -94,5 +94,6 @@ $RECYCLE.BIN/
 *.env
 .env.*
 
-# appsettings overrides (keep templates, ignore local overrides)
-appsettings.*.local.json
+# appsettings (contains local DB credentials — use .template to create your own)
+**/appsettings.json
+**/appsettings.*.local.json
