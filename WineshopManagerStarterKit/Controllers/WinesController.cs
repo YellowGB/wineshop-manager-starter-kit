@@ -56,21 +56,20 @@ public class WinesController : ControllerBase
             return BadRequest();
         }
 
-        _context.Entry(wine).State = EntityState.Modified;
+        var existing = await _context.Wines.FindAsync(id);
 
-        try
+        if (existing == null)
         {
-            await _context.SaveChangesAsync();
+            return NotFound();
         }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!await _context.Wines.AnyAsync(w => w.Id == id))
-            {
-                return NotFound();
-            }
 
-            throw;
-        }
+        existing.Name = wine.Name;
+        existing.WineTypeId = wine.WineTypeId;
+        existing.Quantity = wine.Quantity;
+        existing.AmountBeforeTax = wine.AmountBeforeTax;
+        existing.TaxRate = wine.TaxRate;
+        existing.Threshold = wine.Threshold;
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
