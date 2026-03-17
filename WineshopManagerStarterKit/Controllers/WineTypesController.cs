@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WineshopManagerStarterKit.Data;
@@ -7,6 +8,7 @@ namespace WineshopManagerStarterKit.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class WineTypesController : ControllerBase
 {
     private readonly AppDbContext _context;

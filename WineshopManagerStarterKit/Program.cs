@@ -1,4 +1,8 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WineshopManagerStarterKit.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +66,42 @@ switch (dbProvider)
         break;
 }
 
+// Configure ASP.NET Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
+
+// Configure JWT authentication
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? "ThisIsADefaultDevelopmentKeyThatShouldBeChanged123!";
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "WineshopManager";
+var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "WineshopManagerUsers";
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+    };
+});
+
 var app = builder.Build();
 
 // Initialize database and seed data
@@ -70,8 +110,17 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     context.Database.EnsureCreated();
     DbSeeder.Seed(context);
+
+    // Seed Identity roles and admin user
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    await IdentitySeeder.SeedAsync(roleManager, userManager);
+
     Console.WriteLine("Database initialized and seeded successfully.");
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
