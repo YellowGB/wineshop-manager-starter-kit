@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WineshopManagerStarterKit.Models;
 
@@ -33,4 +34,10 @@ public class Wine
     [Required]
     [Range(0, int.MaxValue)]
     public int Threshold { get; set; }
+
+    [JsonIgnore]
+    public ICollection<TicketWine> TicketWines { get; set; } = new List<TicketWine>();
+
+    [JsonIgnore]
+    public ICollection<OrderWine> OrderWines { get; set; } = new List<OrderWine>();
 }

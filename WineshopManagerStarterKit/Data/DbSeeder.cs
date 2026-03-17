@@ -6,5 +6,9 @@ public static class DbSeeder
     {
         WineTypeSeeder.Seed(context);
         WineSeeder.Seed(context);
+        ClientSeeder.Seed(context);
+        SupplierSeeder.Seed(context);
+        TicketSeeder.Seed(context);
+        OrderSeeder.Seed(context);
     }
 }

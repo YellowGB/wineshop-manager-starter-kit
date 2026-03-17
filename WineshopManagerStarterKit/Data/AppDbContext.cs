@@ -13,6 +13,8 @@ public class AppDbContext : DbContext
     public DbSet<Ticket> Tickets { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<TicketWine> TicketWines { get; set; }
+    public DbSet<OrderWine> OrderWines { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,5 +29,13 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<WineType>()
             .HasIndex(wt => wt.Name)
             .IsUnique();
+
+        // Composite primary key for TicketWine (pivot table)
+        modelBuilder.Entity<TicketWine>()
+            .HasKey(tw => new { tw.TicketId, tw.WineId });
+
+        // Composite primary key for OrderWine (pivot table)
+        modelBuilder.Entity<OrderWine>()
+            .HasKey(ow => new { ow.OrderId, ow.WineId });
     }
 }

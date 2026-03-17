@@ -32,4 +32,6 @@ public class Order
     public bool Validated { get; set; } = false;
 
     public bool Delivered { get; set; } = false;
+
+    public ICollection<OrderWine> OrderWines { get; set; } = new List<OrderWine>();
 }

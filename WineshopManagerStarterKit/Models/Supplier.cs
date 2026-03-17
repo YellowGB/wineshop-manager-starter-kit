@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WineshopManagerStarterKit.Models;
 
@@ -32,5 +33,6 @@ public class Supplier
     [RegularExpression(@"^\d{14}$", ErrorMessage = "SIRET must be exactly 14 digits.")]
     public string Siret { get; set; } = string.Empty;
 
+    [JsonIgnore]
     public ICollection<Order> Orders { get; set; } = new List<Order>();
 }

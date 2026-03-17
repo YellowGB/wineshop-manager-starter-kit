@@ -37,6 +37,50 @@ public class WinesController : ControllerBase
         return wine;
     }
 
+    // GET: api/wines/5/tickets
+    [HttpGet("{id}/tickets")]
+    public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets(int id)
+    {
+        var wine = await _context.Wines.FindAsync(id);
+
+        if (wine == null)
+        {
+            return NotFound();
+        }
+
+        var tickets = await _context.TicketWines
+            .Where(tw => tw.WineId == id)
+            .Include(tw => tw.Ticket)
+                .ThenInclude(t => t.Client)
+            .Select(tw => tw.Ticket)
+            .Distinct()
+            .ToListAsync();
+
+        return tickets;
+    }
+
+    // GET: api/wines/5/orders
+    [HttpGet("{id}/orders")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetOrders(int id)
+    {
+        var wine = await _context.Wines.FindAsync(id);
+
+        if (wine == null)
+        {
+            return NotFound();
+        }
+
+        var orders = await _context.OrderWines
+            .Where(ow => ow.WineId == id)
+            .Include(ow => ow.Order)
+                .ThenInclude(o => o.Supplier)
+            .Select(ow => ow.Order)
+            .Distinct()
+            .ToListAsync();
+
+        return orders;
+    }
+
     // POST: api/wines
     [HttpPost]
     public async Task<ActionResult<Wine>> Create(Wine wine)

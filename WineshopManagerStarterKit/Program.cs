@@ -4,7 +4,11 @@ using WineshopManagerStarterKit.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 
 // Database configuration: try MySQL (Pomelo) first, then SQL Server, then MariaDB (Oracle provider)
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");

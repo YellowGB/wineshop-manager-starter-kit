@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace WineshopManagerStarterKit.Models;
 
@@ -28,5 +29,6 @@ public class Client
     [StringLength(20)]
     public string? Phone { get; set; }
 
+    [JsonIgnore]
     public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }

@@ -22,6 +22,8 @@ public class OrdersController : ControllerBase
     {
         return await _context.Orders
             .Include(o => o.Supplier)
+            .Include(o => o.OrderWines)
+                .ThenInclude(ow => ow.Wine)
             .ToListAsync();
     }
 
@@ -31,6 +33,8 @@ public class OrdersController : ControllerBase
     {
         var order = await _context.Orders
             .Include(o => o.Supplier)
+            .Include(o => o.OrderWines)
+                .ThenInclude(ow => ow.Wine)
             .FirstOrDefaultAsync(o => o.Id == id);
 
         if (order == null)

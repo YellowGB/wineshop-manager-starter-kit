@@ -13,4 +13,6 @@ public class Ticket
 
     [Required]
     public DateTime SaleDate { get; set; }
+
+    public ICollection<TicketWine> TicketWines { get; set; } = new List<TicketWine>();
 }

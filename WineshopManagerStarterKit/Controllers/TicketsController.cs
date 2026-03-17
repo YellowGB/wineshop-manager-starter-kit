@@ -22,6 +22,8 @@ public class TicketsController : ControllerBase
     {
         return await _context.Tickets
             .Include(t => t.Client)
+            .Include(t => t.TicketWines)
+                .ThenInclude(tw => tw.Wine)
             .ToListAsync();
     }
 
@@ -31,6 +33,8 @@ public class TicketsController : ControllerBase
     {
         var ticket = await _context.Tickets
             .Include(t => t.Client)
+            .Include(t => t.TicketWines)
+                .ThenInclude(tw => tw.Wine)
             .FirstOrDefaultAsync(t => t.Id == id);
 
         if (ticket == null)
