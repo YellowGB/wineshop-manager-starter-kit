@@ -109,7 +109,7 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     context.Database.EnsureCreated();
-    DbSeeder.Seed(context);
+    await DbSeeder.SeedAsync(context);
 
     // Seed Identity roles and admin user
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

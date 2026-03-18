@@ -13,6 +13,7 @@ public static class OrderSeeder
 
         var suppliers = context.Suppliers.ToList();
         var wines = context.Wines.ToList();
+        int W(int i) => wines[i % wines.Count].Id;
 
         var orders = new List<Order>();
 
@@ -29,7 +30,7 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[0].Id, Quantity = 24 }
+                new OrderWine { WineId = W(0), Quantity = 24 }
             }
         });
 
@@ -46,8 +47,8 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[1].Id, Quantity = 12 },
-                new OrderWine { WineId = wines[2].Id, Quantity = 24 }
+                new OrderWine { WineId = W(2), Quantity = 12 },
+                new OrderWine { WineId = W(3), Quantity = 24 }
             }
         });
 
@@ -64,7 +65,7 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[3].Id, Quantity = 18 }
+                new OrderWine { WineId = W(5), Quantity = 18 }
             }
         });
 
@@ -81,7 +82,7 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[4].Id, Quantity = 48 }
+                new OrderWine { WineId = W(6), Quantity = 48 }
             }
         });
 
@@ -98,9 +99,9 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[0].Id, Quantity = 18 },
-                new OrderWine { WineId = wines[1].Id, Quantity = 12 },
-                new OrderWine { WineId = wines[3].Id, Quantity = 12 }
+                new OrderWine { WineId = W(0), Quantity = 18 },
+                new OrderWine { WineId = W(1), Quantity = 12 },
+                new OrderWine { WineId = W(8), Quantity = 12 }
             }
         });
 
@@ -117,7 +118,7 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[2].Id, Quantity = 30 }
+                new OrderWine { WineId = W(9), Quantity = 30 }
             }
         });
 
@@ -134,8 +135,8 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[4].Id, Quantity = 30 },
-                new OrderWine { WineId = wines[2].Id, Quantity = 10 }
+                new OrderWine { WineId = W(7), Quantity = 30 },
+                new OrderWine { WineId = W(4), Quantity = 10 }
             }
         });
 
@@ -152,7 +153,7 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[0].Id, Quantity = 12 }
+                new OrderWine { WineId = W(0), Quantity = 12 }
             }
         });
 
@@ -169,8 +170,8 @@ public static class OrderSeeder
             Delivered = true,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[1].Id, Quantity = 12 },
-                new OrderWine { WineId = wines[3].Id, Quantity = 12 }
+                new OrderWine { WineId = W(3), Quantity = 12 },
+                new OrderWine { WineId = W(5), Quantity = 12 }
             }
         });
 
@@ -187,7 +188,7 @@ public static class OrderSeeder
             Delivered = false,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[3].Id, Quantity = 18 }
+                new OrderWine { WineId = W(4), Quantity = 18 }
             }
         });
 
@@ -204,9 +205,9 @@ public static class OrderSeeder
             Delivered = false,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[4].Id, Quantity = 24 },
-                new OrderWine { WineId = wines[0].Id, Quantity = 12 },
-                new OrderWine { WineId = wines[2].Id, Quantity = 14 }
+                new OrderWine { WineId = W(6), Quantity = 24 },
+                new OrderWine { WineId = W(1), Quantity = 12 },
+                new OrderWine { WineId = W(9), Quantity = 14 }
             }
         });
 
@@ -223,8 +224,8 @@ public static class OrderSeeder
             Delivered = false,
             OrderWines = new List<OrderWine>
             {
-                new OrderWine { WineId = wines[2].Id, Quantity = 24 },
-                new OrderWine { WineId = wines[1].Id, Quantity = 12 }
+                new OrderWine { WineId = W(8), Quantity = 24 },
+                new OrderWine { WineId = W(2), Quantity = 12 }
             }
         });
 

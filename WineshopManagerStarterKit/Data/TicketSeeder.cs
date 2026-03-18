@@ -13,6 +13,7 @@ public static class TicketSeeder
 
         var clients = context.Clients.ToList();
         var wines = context.Wines.ToList();
+        int W(int i) => wines[i % wines.Count].Id;
 
         var tickets = new List<Ticket>();
 
@@ -23,7 +24,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 9, 5),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 }
+                new TicketWine { WineId = W(0), Quantity = 1 }
             }
         });
 
@@ -34,7 +35,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 9, 8),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[2].Id, Quantity = 2 }
+                new TicketWine { WineId = W(2), Quantity = 2 }
             }
         });
 
@@ -45,9 +46,9 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 9, 12),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[3].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[4].Id, Quantity = 1 }
+                new TicketWine { WineId = W(5), Quantity = 1 },
+                new TicketWine { WineId = W(3), Quantity = 2 },
+                new TicketWine { WineId = W(7), Quantity = 1 }
             }
         });
 
@@ -58,7 +59,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 9, 15),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[4].Id, Quantity = 1 }
+                new TicketWine { WineId = W(6), Quantity = 1 }
             }
         });
 
@@ -69,7 +70,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 9, 20),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[1].Id, Quantity = 6 }
+                new TicketWine { WineId = W(1), Quantity = 6 }
             }
         });
 
@@ -80,8 +81,8 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 9, 22),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[2].Id, Quantity = 3 },
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 }
+                new TicketWine { WineId = W(8), Quantity = 3 },
+                new TicketWine { WineId = W(0), Quantity = 1 }
             }
         });
 
@@ -92,7 +93,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 1),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[3].Id, Quantity = 1 }
+                new TicketWine { WineId = W(9), Quantity = 1 }
             }
         });
 
@@ -103,19 +104,19 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 3),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[4].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[1].Id, Quantity = 1 }
+                new TicketWine { WineId = W(4), Quantity = 2 },
+                new TicketWine { WineId = W(1), Quantity = 1 }
             }
         });
 
-        // Ticket 9 — someone really likes Château Margaux
+        // Ticket 9 — buying 3 bottles of one wine
         tickets.Add(new Ticket
         {
             ClientId = clients[13].Id,
             SaleDate = new DateTime(2025, 10, 7),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 3 }
+                new TicketWine { WineId = W(0), Quantity = 3 }
             }
         });
 
@@ -126,8 +127,8 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 10),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[4].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[2].Id, Quantity = 1 }
+                new TicketWine { WineId = W(6), Quantity = 1 },
+                new TicketWine { WineId = W(2), Quantity = 1 }
             }
         });
 
@@ -138,7 +139,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 14),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[1].Id, Quantity = 1 }
+                new TicketWine { WineId = W(7), Quantity = 1 }
             }
         });
 
@@ -149,9 +150,9 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 18),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[2].Id, Quantity = 3 },
-                new TicketWine { WineId = wines[4].Id, Quantity = 6 }
+                new TicketWine { WineId = W(0), Quantity = 2 },
+                new TicketWine { WineId = W(5), Quantity = 3 },
+                new TicketWine { WineId = W(8), Quantity = 6 }
             }
         });
 
@@ -162,7 +163,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 21),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[3].Id, Quantity = 2 }
+                new TicketWine { WineId = W(3), Quantity = 2 }
             }
         });
 
@@ -173,19 +174,19 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 10, 25),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[1].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[3].Id, Quantity = 1 }
+                new TicketWine { WineId = W(9), Quantity = 2 },
+                new TicketWine { WineId = W(3), Quantity = 1 }
             }
         });
 
-        // Ticket 15 — repeat buyer, just champagne
+        // Ticket 15 — repeat buyer, sparkling wine
         tickets.Add(new Ticket
         {
             ClientId = clients[2].Id,
             SaleDate = new DateTime(2025, 11, 1),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[4].Id, Quantity = 3 }
+                new TicketWine { WineId = W(6), Quantity = 3 }
             }
         });
 
@@ -196,7 +197,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 11, 5),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 }
+                new TicketWine { WineId = W(4), Quantity = 1 }
             }
         });
 
@@ -207,19 +208,19 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 11, 8),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[2].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[3].Id, Quantity = 1 }
+                new TicketWine { WineId = W(2), Quantity = 1 },
+                new TicketWine { WineId = W(8), Quantity = 1 }
             }
         });
 
-        // Ticket 18 — a collector buying Barolo
+        // Ticket 18 — a collector buying 4 bottles
         tickets.Add(new Ticket
         {
             ClientId = clients[13].Id,
             SaleDate = new DateTime(2025, 11, 12),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[1].Id, Quantity = 4 }
+                new TicketWine { WineId = W(1), Quantity = 4 }
             }
         });
 
@@ -230,9 +231,9 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 11, 16),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[2].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[4].Id, Quantity = 2 }
+                new TicketWine { WineId = W(0), Quantity = 2 },
+                new TicketWine { WineId = W(5), Quantity = 2 },
+                new TicketWine { WineId = W(9), Quantity = 2 }
             }
         });
 
@@ -243,7 +244,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 11, 20),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[3].Id, Quantity = 1 }
+                new TicketWine { WineId = W(7), Quantity = 1 }
             }
         });
 
@@ -254,8 +255,8 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 12, 2),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[4].Id, Quantity = 4 },
-                new TicketWine { WineId = wines[0].Id, Quantity = 2 }
+                new TicketWine { WineId = W(6), Quantity = 4 },
+                new TicketWine { WineId = W(0), Quantity = 2 }
             }
         });
 
@@ -266,7 +267,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 12, 5),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[2].Id, Quantity = 1 }
+                new TicketWine { WineId = W(4), Quantity = 1 }
             }
         });
 
@@ -277,20 +278,20 @@ public static class TicketSeeder
             SaleDate = new DateTime(2025, 12, 15),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[1].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[4].Id, Quantity = 2 }
+                new TicketWine { WineId = W(0), Quantity = 1 },
+                new TicketWine { WineId = W(8), Quantity = 1 },
+                new TicketWine { WineId = W(6), Quantity = 2 }
             }
         });
 
-        // Ticket 24 — new year's eve champagne
+        // Ticket 24 — new year's eve sparkling
         tickets.Add(new Ticket
         {
             ClientId = clients[14].Id,
             SaleDate = new DateTime(2025, 12, 28),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[4].Id, Quantity = 6 }
+                new TicketWine { WineId = W(6), Quantity = 6 }
             }
         });
 
@@ -301,7 +302,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2026, 1, 8),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[3].Id, Quantity = 1 }
+                new TicketWine { WineId = W(3), Quantity = 1 }
             }
         });
 
@@ -312,8 +313,8 @@ public static class TicketSeeder
             SaleDate = new DateTime(2026, 1, 14),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[2].Id, Quantity = 2 }
+                new TicketWine { WineId = W(5), Quantity = 1 },
+                new TicketWine { WineId = W(2), Quantity = 2 }
             }
         });
 
@@ -324,7 +325,7 @@ public static class TicketSeeder
             SaleDate = new DateTime(2026, 1, 20),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[1].Id, Quantity = 1 }
+                new TicketWine { WineId = W(9), Quantity = 1 }
             }
         });
 
@@ -335,19 +336,19 @@ public static class TicketSeeder
             SaleDate = new DateTime(2026, 2, 12),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[0].Id, Quantity = 1 },
-                new TicketWine { WineId = wines[4].Id, Quantity = 1 }
+                new TicketWine { WineId = W(0), Quantity = 1 },
+                new TicketWine { WineId = W(7), Quantity = 1 }
             }
         });
 
-        // Ticket 29 — regular buyer picks up some Chablis
+        // Ticket 29 — regular buyer picks up some white
         tickets.Add(new Ticket
         {
             ClientId = clients[2].Id,
             SaleDate = new DateTime(2026, 2, 20),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[2].Id, Quantity = 3 }
+                new TicketWine { WineId = W(2), Quantity = 3 }
             }
         });
 
@@ -358,9 +359,9 @@ public static class TicketSeeder
             SaleDate = new DateTime(2026, 3, 5),
             TicketWines = new List<TicketWine>
             {
-                new TicketWine { WineId = wines[1].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[3].Id, Quantity = 2 },
-                new TicketWine { WineId = wines[4].Id, Quantity = 1 }
+                new TicketWine { WineId = W(1), Quantity = 2 },
+                new TicketWine { WineId = W(4), Quantity = 2 },
+                new TicketWine { WineId = W(8), Quantity = 1 }
             }
         });
 
