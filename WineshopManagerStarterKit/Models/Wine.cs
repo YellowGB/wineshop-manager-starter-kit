@@ -15,7 +15,7 @@ public class Wine
     [Required]
     public int WineTypeId { get; set; }
 
-    public WineType WineType { get; set; } = null!;
+    public WineType? WineType { get; set; }
 
     [Required]
     [Range(0, int.MaxValue)]

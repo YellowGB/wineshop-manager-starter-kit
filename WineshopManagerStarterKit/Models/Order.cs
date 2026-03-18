@@ -9,7 +9,7 @@ public class Order
     [Required]
     public int SupplierId { get; set; }
 
-    public Supplier Supplier { get; set; } = null!;
+    public Supplier? Supplier { get; set; }
 
     [Required]
     public DateTime OrderDate { get; set; }

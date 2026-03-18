@@ -9,12 +9,12 @@ public class OrderWine
     public int OrderId { get; set; }
 
     [JsonIgnore]
-    public Order Order { get; set; } = null!;
+    public Order? Order { get; set; }
 
     [Required]
     public int WineId { get; set; }
 
-    public Wine Wine { get; set; } = null!;
+    public Wine? Wine { get; set; }
 
     [Required]
     [Range(1, int.MaxValue)]

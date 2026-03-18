@@ -26,7 +26,7 @@ public class TicketsController : ControllerBase
             .Include(t => t.Client)
             .Include(t => t.TicketWines)
                 .ThenInclude(tw => tw.Wine)
-                    .ThenInclude(w => w.WineType)
+                    .ThenInclude(w => w!.WineType)
             .ToListAsync();
     }
 
@@ -38,7 +38,7 @@ public class TicketsController : ControllerBase
             .Include(t => t.Client)
             .Include(t => t.TicketWines)
                 .ThenInclude(tw => tw.Wine)
-                    .ThenInclude(w => w.WineType)
+                    .ThenInclude(w => w!.WineType)
             .FirstOrDefaultAsync(t => t.Id == id);
 
         if (ticket == null)

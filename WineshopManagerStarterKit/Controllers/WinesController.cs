@@ -57,8 +57,8 @@ public class WinesController : ControllerBase
         var tickets = await _context.TicketWines
             .Where(tw => tw.WineId == id)
             .Include(tw => tw.Ticket)
-                .ThenInclude(t => t.Client)
-            .Select(tw => tw.Ticket)
+                .ThenInclude(t => t!.Client)
+            .Select(tw => tw.Ticket!)
             .Distinct()
             .ToListAsync();
 
@@ -79,8 +79,8 @@ public class WinesController : ControllerBase
         var orders = await _context.OrderWines
             .Where(ow => ow.WineId == id)
             .Include(ow => ow.Order)
-                .ThenInclude(o => o.Supplier)
-            .Select(ow => ow.Order)
+                .ThenInclude(o => o!.Supplier)
+            .Select(ow => ow.Order!)
             .Distinct()
             .ToListAsync();
 

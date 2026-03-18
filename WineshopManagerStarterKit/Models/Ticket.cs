@@ -9,7 +9,7 @@ public class Ticket
     [Required]
     public int ClientId { get; set; }
 
-    public Client Client { get; set; } = null!;
+    public Client? Client { get; set; }
 
     [Required]
     public DateTime SaleDate { get; set; }

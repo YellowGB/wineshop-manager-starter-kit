@@ -26,7 +26,7 @@ public class OrdersController : ControllerBase
             .Include(o => o.Supplier)
             .Include(o => o.OrderWines)
                 .ThenInclude(ow => ow.Wine)
-                    .ThenInclude(w => w.WineType)
+                    .ThenInclude(w => w!.WineType)
             .ToListAsync();
     }
 
@@ -38,7 +38,7 @@ public class OrdersController : ControllerBase
             .Include(o => o.Supplier)
             .Include(o => o.OrderWines)
                 .ThenInclude(ow => ow.Wine)
-                    .ThenInclude(w => w.WineType)
+                    .ThenInclude(w => w!.WineType)
             .FirstOrDefaultAsync(o => o.Id == id);
 
         if (order == null)
